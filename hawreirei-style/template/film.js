@@ -203,7 +203,7 @@ function multiples(g, tq) {
   [4, 8, 12, 16].forEach((n, i) => chip(g, 'k4' + n, n, 2490 + i * 150, 2740, tq, T.m4 + i * .62, n === 12));
   mathSlip(g, 'kpk2', 'KPK = 12', 2620, 2990, -1, tq, T.kpk2, { size: 80, bg: '#FBEFC9' });
   mathSlip(g, 'date', 'tanggal 1 + 12 = tanggal 13', 2620, 3180, 1, tq, T.date, { size: 66 });
-  stampPrint(g, 3020, 3330, -8, tq, T.not12, 'BUKAN 12!', '#B8392C', 62);
+  stampPrint(g, 2218, 3035, -8, tq, T.not12, 'BUKAN 12!', '#B8392C', 54);
 }
 function bonusCard(g, tq) {
   card(g, PAT.bonus, 2620, 3800, -1.5, tq, T.bonus - .2);
