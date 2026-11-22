@@ -135,3 +135,63 @@ Model: **Eleven v3**. Tag ekspresi `[...]` ditulis dalam bahasa Inggris karena v
 ```
 [cheerfully, calling out] Pak Wali!
 ```
+
+## Versi sekaligus (satu kali generate)
+
+Tempel blok di bawah ini sekaligus, lalu kirim satu file hasilnya. Nanti saya potong per baris berdasarkan jeda antarbaris.
+
+```
+[shouting] Dik Dimas!
+
+[sharply] Mas Dimas!
+
+[panicked, shouting] Aku cuma WALI KOTA!
+
+[flatly] Kok bisa begini?
+
+[calm, storytelling] Tiga tahun lalu... kota ini tenggelam tiap Februari.
+
+[flatly] Banjir.
+
+[flatly] Sampah.
+
+[flatly] Pungli.
+
+[bitterly] Kata orang... nggak bisa dibenerin.
+
+[chuckles at himself] Aku dulu cuma ojol... yang hobi lapor jalan bolong.
+
+[sighs] Laporanku nggak pernah dibalas.
+
+[quietly proud] Jadi aku nyalon sendiri... Modal patungan warga.
+
+[cheerfully, calling out] Pak Wali!
+
+[warmly] Sekarang umurku dua puluh delapan... dan aku wali kotanya.
+
+[dryly] Di Nusa Wacana, itu sah.
+
+[deadpan, slowly] Makan dulu, Le. [sighs] Wali kota juga butuh gorengan.
+
+[mouth full, casual] Iya, Bu.
+
+[deadpan, not looking up] Siapa, Le?
+
+[whispers, shocked] ...Calon presiden, Bu. [gulps]
+
+[deep voice, booming, jovial] Dik Dimas! [laughs] Anak muda kayak kamu itu... LAKU.
+
+[deep voice, patronizing] Jadi wakil saya, ya? Besok pagi... saya tunggu jawabannya.
+
+[deadpan] Gorengan, Pak?
+
+[soft, cold] Mas Dimas. [pause] Jangan jawab Bambang dulu.
+
+[deep voice, mouth full, surprised] Lho, Sekar?!
+
+[smug, quietly] Tawaran saya... jauh lebih baik.
+
+[deadpan, slowly] Le... tempenya gosong.
+
+[uncertain, to the audience] Malam ini... aku harus jawab apa?
+```
