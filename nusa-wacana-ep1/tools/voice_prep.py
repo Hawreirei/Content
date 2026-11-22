@@ -4,7 +4,7 @@ Mulut tokoh langsung mengikuti rekaman; audio.py memasukkan suara dan menurunkan
 import glob, json, os
 import numpy as np, soundfile as sf
 dur, lips = {}, {}
-for p in sorted(glob.glob('voices/*.wav')):
+for p in sorted(p for p in glob.glob('voices/*.wav') if not p.endswith('raw.wav')):
     i = os.path.basename(p)[:-4]; x, sr = sf.read(p); x = x.mean(1) if x.ndim > 1 else x
     dur[i] = round(len(x) / sr, 3); hop = sr // 24; o, b = [], []
     for k in range(0, len(x), hop):

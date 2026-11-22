@@ -130,12 +130,13 @@ add(mus, theremin([(b * BEAT, m, dd * BEAT) for b, m, dd in THEME], .9), a + .05
 
 # tuba muram (banjir): 3 stinger + nada sedih
 a, d = cues['tuba']
+STING = [e['t'] for e in EV if e['type'] == 'stinger']
 for k, (m1, m2) in enumerate([(41, 40), (40, 39), (39, 38)]):
-    t0 = a + k * 1.25
+    t0 = STING[k]
     add(mus, tuba(m1, .45, 1), t0); add(mus, tuba(m2, .7, .9), t0 + .45)
     add(mus, slide(900 - k * 100, 300, .5, .6), t0 + .1, 1, .4)
     add(mus, timpani(38, .5), t0)
-add(mus, tuba(38, 2.2, .9), a + 3.75); add(mus, slide(500, 180, 1.4, .5), a + 4.2, 1, .3)
+add(mus, tuba(38, 2.2, .9), STING[2] + 1.25); add(mus, slide(500, 180, 1.4, .5), STING[2] + 1.7, 1, .3)
 
 # surf (asal-usul): gitar KS tremolo + drum
 a, d = cues['surf']
@@ -230,7 +231,8 @@ mus = reverb(mus)
 def gate(buf, a, b, f=.01):
     i0, i1 = int(a * SR), int(b * SR); F = int(f * SR)
     buf[i0:i1] = 0; buf[max(0, i0 - F):i0] *= np.linspace(1, 0, min(F, i0))[:, None]
-for a, b in [(2.6, 4.2), (64.375, 68.75), (81.25, DUR + 1)]: gate(mus, a, b)
+SIL = [(e['t'], e['t'] + e['d']) for e in EV if e['type'] == 'silence']
+for a, b in SIL: gate(mus, a, b)
 
 # ———————————————————— foley ————————————————————
 fx = np.zeros((N, 2))
@@ -356,13 +358,15 @@ for e in EV:
     x, sr = sf.read(p); x = x.mean(1) if x.ndim > 1 else x
     if sr != SR: x = np.interp(np.arange(int(len(x) * SR / sr)) * sr / SR, np.arange(len(x)), x)
     add(vo, x, e['t'])
-    i0, i1 = int(e['t'] * SR), int(e['t'] * SR) + len(x); duck[max(0, i0 - 2400):i1 + 4800] = .45
+    i0, i1 = int(e['t'] * SR), int(e['t'] * SR) + len(x); duck[max(0, i0 - 2400):i1 + 4800] = .32
 duck = np.convolve(duck, np.ones(4800) / 4800, mode='same')
 
 # hening dingin: ambience turun, hanya dengung portal + detak jam + desis pelan
-quiet = np.ones(N); i0, i1 = int(64.4 * SR), int(66.85 * SR); quiet[i0:i1] = .3
+quiet = np.ones(N); i0, i1 = int(SIL[1][0] * SR), int((SIL[1][1] - .2) * SR); quiet[i0:i1] = .3
 quiet = np.convolve(quiet, np.ones(2400) / 2400, mode='same')
-mix = mus * .55 * duck[:, None] + fx * .9 + amb * .8 * quiet[:, None] + vo * 1.0
+# suara: kompresi lembut lalu dinaikkan supaya jelas di atas musik
+vo = np.tanh(vo * 2.2) / np.tanh(2.2) * 1.15
+mix = mus * .55 * duck[:, None] + fx * .9 * (0.6 + 0.4 * duck[:, None]) + amb * .8 * quiet[:, None] + vo
 mix = np.tanh(mix * .9) / .9
 mix = mix[:int(DUR * SR)]
 for name, b in (('music', mus), ('fx', fx + amb), ('mix', mix)):

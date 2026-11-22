@@ -1,108 +1,108 @@
 1
-00:00:00,150 --> 00:00:01,638
-BAMBANG: Dik Dimas!
+00:00:00,150 --> 00:00:02,600
+BAMBANG: "Dik Dimas!" teriak Pak Bambang.
 
 2
-00:00:00,500 --> 00:00:01,988
-SEKAR: Mas Dimas!
+00:00:02,620 --> 00:00:04,600
+SEKAR: "Mas Dimas!" sahut Bu Sekar.
 
 3
-00:00:01,200 --> 00:00:03,218
-DIMAS: Aku cuma wali kota!
+00:00:04,620 --> 00:00:06,920
+DIMAS: "Aku cuma WALI KOTA!" teriakku.
 
 4
-00:00:02,750 --> 00:00:03,900
+00:00:06,940 --> 00:00:08,190
 DIMAS (batin): Kok bisa begini?
 
 5
-00:00:04,650 --> 00:00:08,491
-DIMAS (batin): Tiga tahun lalu, kota ini tenggelam tiap Februari.
+00:00:09,085 --> 00:00:12,665
+DIMAS (batin): Tiga tahun lalu... kota ini tenggelam tiap Februari.
 
 6
-00:00:08,900 --> 00:00:10,050
+00:00:12,835 --> 00:00:13,985
 DIMAS (batin): Banjir.
 
 7
-00:00:10,150 --> 00:00:11,300
+00:00:14,045 --> 00:00:15,195
 DIMAS (batin): Sampah.
 
 8
-00:00:11,400 --> 00:00:12,550
+00:00:15,355 --> 00:00:16,505
 DIMAS (batin): Pungli.
 
 9
-00:00:12,700 --> 00:00:14,980
-DIMAS (batin): Kata orang, nggak bisa dibenerin.
+00:00:16,655 --> 00:00:19,105
+DIMAS (batin): Kata orang... nggak bisa dibenerin.
 
 10
-00:00:15,300 --> 00:00:18,630
-DIMAS (batin): Aku dulu cuma ojol yang hobi lapor jalan bolong.
+00:00:19,425 --> 00:00:23,715
+DIMAS (batin): Aku dulu cuma ojol... yang hobi lapor jalan bolong.
 
 11
-00:00:18,650 --> 00:00:21,374
+00:00:23,935 --> 00:00:26,795
 DIMAS (batin): Laporanku nggak pernah dibalas.
 
 12
-00:00:21,400 --> 00:00:24,400
-DIMAS (batin): Jadi aku nyalon sendiri. Modal patungan warga.
+00:00:27,015 --> 00:00:30,075
+DIMAS (batin): Jadi aku nyalon sendiri... Modal patungan warga.
 
 13
-00:00:24,550 --> 00:00:25,979
-WARGA: Pak Wali!
+00:00:30,345 --> 00:00:32,285
+WARGA: "Pak Wali!" panggil warga.
 
 14
-00:00:25,450 --> 00:00:28,430
-DIMAS (batin): Sekarang umurku 28, dan aku wali kotanya.
+00:00:32,305 --> 00:00:36,265
+DIMAS (batin): Sekarang umurku 28... dan aku wali kotanya.
 
 15
-00:00:28,450 --> 00:00:30,762
+00:00:36,285 --> 00:00:38,785
 DIMAS (batin): Di Nusa Wacana, itu sah.
 
 16
-00:00:37,300 --> 00:00:40,906
-IBU: Makan dulu, Le. Wali kota juga butuh gorengan.
+00:00:45,210 --> 00:00:49,980
+IBU: Malam itu Ibu bilang, "Makan dulu, Le. Wali kota juga butuh gorengan."
 
 17
-00:00:40,500 --> 00:00:41,650
-DIMAS: Iya, Bu.
+00:00:50,000 --> 00:00:52,018
+DIMAS: "Iya, Bu," jawabku.
 
 18
-00:00:43,950 --> 00:00:45,438
-IBU: Siapa, Le?
+00:00:54,085 --> 00:00:56,805
+IBU: "Siapa, Le?" tanya Ibu, tanpa menoleh.
 
 19
-00:00:45,350 --> 00:00:47,544
-DIMAS: ...Calon presiden, Bu.
+00:00:56,825 --> 00:00:59,935
+DIMAS: "...Calon presiden, Bu," bisikku.
 
 20
-00:00:48,300 --> 00:00:51,030
-BAMBANG: Dik Dimas! Anak muda kayak kamu itu laku.
+00:01:00,255 --> 00:01:05,955
+BAMBANG: "Dik Dimas! Anak muda kayak kamu itu... LAKU," kata Pak Bambang.
 
 21
-00:00:51,050 --> 00:00:55,185
-BAMBANG: Jadi wakil saya, ya? Besok pagi saya tunggu jawabannya.
+00:01:05,975 --> 00:01:10,615
+BAMBANG: "Jadi wakil saya, ya? Besok pagi saya tunggu jawabannya," katanya lagi.
 
 22
-00:00:54,950 --> 00:00:56,674
-IBU: Gorengan, Pak?
+00:01:10,635 --> 00:01:13,476
+IBU: Ibu cuma bilang, "Gorengan, Pak?"
 
 23
-00:00:58,650 --> 00:01:01,726
-SEKAR: Mas Dimas. Jangan jawab Bambang dulu.
+00:01:15,960 --> 00:01:19,700
+SEKAR: "Mas Dimas. Jangan jawab Bambang dulu," kata Bu Sekar.
 
 24
-00:01:01,150 --> 00:01:02,756
-BAMBANG: Lho, Sekar?!
+00:01:19,720 --> 00:01:23,530
+BAMBANG: "Lho, Sekar?!" kata Pak Bambang, mulutnya penuh tempe.
 
 25
-00:01:02,300 --> 00:01:04,355
-SEKAR: Tawaran saya jauh lebih baik.
+00:01:23,550 --> 00:01:26,960
+SEKAR: "Tawaran saya... jauh lebih baik," kata Bu Sekar.
 
 26
-00:01:06,900 --> 00:01:08,730
-IBU: Le... tempenya gosong.
+00:01:29,380 --> 00:01:32,870
+IBU: Lalu Ibu bilang... "Le... tempenya gosong."
 
 27
-00:01:09,000 --> 00:01:11,665
-DIMAS (batin): Malam ini aku harus jawab apa?
+00:01:33,190 --> 00:01:36,110
+DIMAS (batin): Malam ini... aku harus jawab apa?
 

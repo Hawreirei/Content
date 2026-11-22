@@ -4,7 +4,8 @@
 set -e
 cd "$(dirname "$0")"
 mkdir -p out voices
-[ -n "$(ls voices/*.wav 2>/dev/null)" ] && python3 tools/voice_prep.py
+node tools/still.mjs 0.6 --events
+[ -f voices/raw.wav ] && python3 tools/cut_vo.py && python3 tools/voice_prep.py
 node tools/render.mjs --workers 4
 node tools/still.mjs 0.6 --events
 python3 audio.py

@@ -3,12 +3,12 @@ import { clamp, lerp, seg, ss, eo, ei, eio, back, hash, TAU } from './lib.js';
 import { W, H, INK, init, frame, g, push, pop, translate, rotate, scale, shape, fillOnly, stroke, ell, arc, rr, rect, spline, dot, text, screenRect, S, reset, bands } from './toon.js';
 import { dimas, ibu, bambang, sekar, oyen, tempe, PAL, WHO_COL, sweat } from './chars.js';
 import * as Wd from './worlds.js';
-import { DUR, q, LINES, SHOTS, shotAt, WIPES, TAGS, T, CUES, BEAT } from './story.js';
+import { DUR, q, LINES, SHOTS, shotAt, shotNamed, WIPES, TAGS, T, CUES, CUTS, SILENCES, BEAT } from './story.js';
 
 init(document.getElementById('c'));
 const J = async f => { try { const r = await fetch(f); if (r.ok) return await r.json(); } catch (e) { } return null; };
 const DURS = (await J('voices/dur.json')) || {}, LIPS = (await J('voices/lips.json')) || {};
-const LINE = Object.fromEntries(LINES.map(([id, who, sub, tts, t0, d]) => [id, { id, who, sub, tts: tts || sub, t0, d: DURS[id] ?? d }]));
+const LINE = Object.fromEntries(LINES.map(([id, who, sub, raw, t0, d, mouth]) => [id, { id, who, sub, raw, t0, d: DURS[id] ?? d, mouth }]));
 const TER = Wd.TER;
 
 // —— gerak mulut: dari rekaman bila ada (voices/lips.json), kalau belum ada pakai amplop suku kata sementara ——
@@ -16,14 +16,15 @@ const sylls = s => (s.toLowerCase().match(/[aiueo]+/g) || ['a']).length;
 function talk(who, t) {
   const tq = q(t);
   for (const L of Object.values(LINE)) {
-    if (L.who !== who) continue;
-    if (tq >= L.t0 && tq < L.t0 + L.d) {
-      const lp = LIPS[L.id], k = Math.floor((tq - L.t0) * 24);
-      if (lp) return { o: lp.o[k] ?? 0, w: .8 + .45 * (lp.b[k] ?? .5), talking: true };
-      const n = sylls(L.sub), ph = (tq - L.t0) / L.d * n, i = Math.floor(ph), u = ph - i;
-      const o = Math.pow(Math.max(0, Math.sin(Math.PI * u)), .8) * (.45 + .45 * hash(i * 3.7 + L.t0));
-      return { o, w: .85 + .3 * hash(i * 1.3), talking: true };
-    }
+    const rel = tq - L.t0;
+    if (rel < 0 || rel >= L.d) continue;
+    const part = L.mouth.find(([a, b, w]) => w === who && rel >= a && rel < b);
+    if (!part) continue;
+    const lp = LIPS[L.id], k = Math.floor(rel * 24);
+    if (lp) return { o: lp.o[k] ?? 0, w: .8 + .45 * (lp.b[k] ?? .5), talking: true };
+    const n = Math.max(1, Math.round((part[1] - part[0]) * 5.5)), ph = (rel - part[0]) / (part[1] - part[0]) * n, i = Math.floor(ph), u = ph - i;
+    const o = Math.pow(Math.max(0, Math.sin(Math.PI * u)), .8) * (.45 + .45 * hash(i * 3.7 + L.t0));
+    return { o, w: .85 + .3 * hash(i * 1.3), talking: true };
   }
   return { o: 0, w: 1, talking: false };
 }
@@ -64,8 +65,8 @@ const emerge = (t, t0) => back(clamp((t - t0) / .45), 1.4);
 // —— teras dengan semua isi, dipakai beberapa shot ——
 function terraceScene(t, o = {}) {
   const tq = q(t);
-  const burnt = t > 65.6 ? 1 : 0, smoke = clamp((t - 65.0) / 1.2) * (t < 81.25 || t > 0 ? 1 : 0);
-  Wd.terrace(t, { egg: o.egg, clockSec: Math.floor(t), burnt: o.burnt ?? burnt, smoke: o.smoke ?? (t > 64 ? smoke : 0), tempeN: o.tempeN ?? (t > 55.6 ? 3 : 4), oyenMunch: o.oyenMunch ?? 0, oyenLook: o.oyenLook ?? [-.5, -.3], fry: 1 });
+  const burnt = t > T.silence[0] + 1.2 ? 1 : 0, smoke = clamp((t - T.silence[0] - .6) / 1.2);
+  Wd.terrace(t, { egg: o.egg, clockSec: Math.floor(t), burnt: o.burnt ?? burnt, smoke: o.smoke ?? (t > T.silence[0] - .3 ? smoke : 0), tempeN: o.tempeN ?? (t > T.take ? 3 : 4), oyenMunch: o.oyenMunch ?? 0, oyenLook: o.oyenLook ?? [-.5, -.3], fry: 1 });
   const p1 = o.p1 ?? 0, p2 = o.p2 ?? 0;
   if (p1 > 0) Wd.portal(TER.p1[0], TER.p1[1], 230, t, { open: p1, inner: Wd.innerBambang });
   if (p2 > 0) Wd.portal(TER.p2[0], TER.p2[1], 220, t, { open: p2, inner: Wd.innerSekar });
@@ -81,10 +82,10 @@ const SH = {};
 SH.hook = (t) => {
   const tf = Math.min(t, T.freeze), fr = t >= T.freeze;
   const sh = fr ? 0 : 9;
-  cam(540, 830, 1.12 + .04 * ss(seg(t, 0, 2.6)), 0, sh, t);
-  const bam = B(tf, { s: .8, lean: .38, mouth: { o: tf > .15 && tf < 1 ? .9 : .5, w: 1.2, sm: .2 }, brow: .6, holdR: 'point', armR: { h: [140, 40], bend: -20 } });
-  const sek = Sk(tf, { s: .8, lean: .3, mouth: { o: tf > .5 && tf < 1.3 ? .7 : .3, w: 1, sm: .2 }, holdR: 'point', armR: { h: [130, 60], bend: 20 } });
-  const dim = D(tf, { panic: fr ? 0 : 1, look: [hash(Math.floor(tf * 6)) > .5 ? -.7 : .7, -.4], lid: 0, pupil: 4, brow: -1, mouth: { o: tf > 1.2 && tf < 2.45 ? .95 : .55, w: .9, sm: -.6 }, sweat: tf * 2,
+  cam(540, 830, 1.12 + .04 * ss(seg(t, 0, T.freeze)), 0, sh, t);
+  const bam = B(tf, { s: .8, lean: .38, mouth: { o: talk('BAMBANG', tf).talking ? .4 + talk('BAMBANG', tf).o * .6 : .35, w: 1.2, sm: .2 }, brow: .6, holdR: 'point', armR: { h: [140, 40], bend: -20 } });
+  const sek = Sk(tf, { s: .8, lean: .3, mouth: { o: talk('SEKAR', tf).talking ? .3 + talk('SEKAR', tf).o * .6 : .25, w: 1, sm: .2 }, holdR: 'point', armR: { h: [130, 60], bend: 20 } });
+  const dim = D(tf, { panic: fr ? 0 : 1, look: [hash(Math.floor(tf * 6)) > .5 ? -.7 : .7, -.4], lid: 0, pupil: 4, brow: -1, mouth: { o: talk('DIMAS', tf).talking ? .5 + talk('DIMAS', tf).o * .5 : .5, w: .9, sm: -.6 }, sweat: tf * 2,
     armR: { h: [40, -150], bend: 40 }, armL: { h: [-60, -150], bend: -40 }, lean: -.06 });
   terraceScene(tf, { p1: 1, p2: 1, bam, sek, dim, smoke: 0, burnt: 0 });
   if (fr) { reset(); screenRect('#1b1422', .18); }
@@ -92,7 +93,7 @@ SH.hook = (t) => {
 SH.wipeIn = (t) => { reset(); screenRect('#1b1422'); };
 // TANGGUL sekarang
 SH.dam = (t) => {
-  const z = lerp(1.0, 1.12, ss(seg(t, 4.375, 8.75)));
+  const z = lerp(1.0, 1.12, ss(seg(t, ...shotAt(t).slice(0, 2))));
   cam(540, 1060, z);
   Wd.dam(t, { angkot: 1 });
   const tq = q(t);
@@ -114,8 +115,8 @@ SH.youngCU = (t) => {
 // JALAN BOLONG + layar laporan
 SH.pothole = (t) => {
   const tq = q(t);
-  if (t < 18.0) {
-    cam(540, 1060, lerp(1.0, 1.08, ss(seg(t, 15, 18))));
+  if (t < T.phone) {
+    cam(540, 1060, lerp(1.0, 1.08, ss(seg(t, T.potA, T.phone))));
     Wd.street(t);
     Wd.hoverScooter(860, 1250, 1, t);
     const snap = t > T.photo - .3 && t < T.photo + .2;
@@ -128,7 +129,7 @@ SH.pothole = (t) => {
     bands(['#7c8a8c', '#9aa6a2'], -300, 2400);
     shape(rr(250, 360, 600, 1120, 60), { fill: '#2b2e37', lw: 9 });
     shape(rr(290, 420, 520, 960, 30), { fill: '#0f2a2a', lw: 7 });
-    const n = Math.floor((t - 18.0) * 34);
+    const n = Math.floor((t - T.phone) * 34);
     const L1 = 'LAPORAN #4.117', L2 = 'JALAN BOLONG JL. RAWA 3', L3 = 'STATUS: TERKIRIM';
     text(L1.slice(0, n), 330, 520, { font: '400 54px VT323', fill: '#7ff0e6', align: 'left' });
     text(L2.slice(0, Math.max(0, n - L1.length)), 330, 590, { font: '400 40px VT323', fill: '#7ff0e6', align: 'left' });
@@ -145,14 +146,14 @@ SH.pothole = (t) => {
     shape(ell(130, 1050, 180, 200, 30), { fill: PAL.helm, lw: 9 });
   }
 };
-SH.can = (t) => { cam(540, 980, lerp(1.0, 1.12, ss(seg(t, 21.25, 24.375)))); Wd.canInsert(t, T.coins); };
+SH.can = (t) => { cam(540, 980, lerp(1.0, 1.12, ss(seg(t, ...shotAt(t).slice(0, 2))))); Wd.canInsert(t, T.coins); };
 // KOTA sekarang: pull-back
 SH.city = (t) => {
-  const u = ss(seg(t, 24.375, 27.2)), z = lerp(2.3, 1.0, u);
+  const u = ss(seg(t, T.cityA, T.cityA + 2.8)), z = lerp(2.3, 1.0, u);
   cam(lerp(560, 540, u), lerp(900, 1100, u), z);
   Wd.city(t);
   const tq = q(t);
-  const wave = t < 27.5;
+  const wave = t < T.cityA + 3.1;
   dimas({ x: 560, y: 1640, s: 1.0, face: 1, t, look: [-.2, 0], lid: .1, brow: .2, blink: blinks(t, 8), mouth: talk('DIMAS', t).talking ? { o: talk('DIMAS', t).o } : { o: wave ? .45 : 0, sm: 1 },
     armR: wave ? { h: [70 + Math.sin(tq * 12) * 16, -170], bend: 30 } : { h: [40, 180], bend: 20 }, armL: { h: [-50, 180], bend: -10 } });
 };
@@ -160,7 +161,7 @@ SH.city = (t) => {
 SH.title = (t) => {
   reset(); screenRect('#171437');
   for (let i = 0; i < 40; i++) dot(hash(i) * W, hash(i + 3) * H, 3 + hash(i + 1) * 4, '#f7f3e8');
-  const u = seg(q(t), 32.6, 32.85), s = u < 1 ? back(u, 2.4) : 1;
+  const u = seg(q(t), T.title[0] + .1, T.title[0] + .35), s = u < 1 ? back(u, 2.4) : 1;
   reset(); translate(540, 900); rotate(-.06 + Math.sin(t * 1.3) * .01); scale(s);
   shape(rect(-430, -380, 860, 700), { fill: '#f2ead0', lw: 9, shade: () => { for (let k = 0; k < 9; k++) stroke([[-430 + k * 108, -380], [-430 + k * 108, 320]], 3, { line: '#d6c9a6' }); for (let k = 0; k < 7; k++) stroke([[-430, -380 + k * 108], [430, -380 + k * 108]], 3, { line: '#d6c9a6' }); } });
   text('KARTU SUARA', 0, -300, { font: '400 52px VT323', fill: '#c0213a' });
@@ -169,10 +170,10 @@ SH.title = (t) => {
   text('WACANA', 10, 50, { font: '400 170px "Titan One"', fill: '#c2603f', outlineW: 20, outlineCol: INK });
   text('WACANA', 0, 40, { font: '400 170px "Titan One"', fill: '#ffd36e', outlineW: 20, outlineCol: INK });
   // lubang coblosan di pojok
-  const h = seg(t, 33.4, 33.5);
+  const h = seg(t, T.title[0] + .9, T.title[0] + 1.0);
   if (h > 0) { shape(ell(330, 230, 26 * h, 22 * h, 16), { fill: '#171437', lw: 6 }); }
   reset();
-  const b = ss(seg(t, 33.0, 33.4));
+  const b = ss(seg(t, T.title[0] + .5, T.title[0] + .9));
   g.globalAlpha = b;
   translate(540, 1330);
   shape(rr(-400, -60, 800, 120, 16), { fill: '#1b1422', lw: 7 });
@@ -182,39 +183,39 @@ SH.title = (t) => {
 // TERAS: two-shot
 SH.terrace2 = (t) => {
   const tq = q(t);
-  cam(430, 960, 1.3 + .03 * ss(seg(t, 36.875, 41.875)));
+  cam(430, 960, 1.3 + .03 * ss(seg(t, ...shotAt(t).slice(0, 2))));
   const ring = t > T.buzz1 ? 1 : 0;
   terraceScene(t, { oyenMunch: 1, dim: D(t, { holdR: 'tempe', armR: { h: [60 + (Math.floor(tq * 2) % 2) * 4, -40 - Math.max(0, Math.sin(tq * 3)) * 40], bend: 40 }, look: ring ? [-.6, .6] : [-.4, 0], ring, mouth: talk('DIMAS', t).talking ? undefined : { o: Math.max(0, Math.sin(tq * 9)) * .3, sm: .4 } }) });
 };
-SH.watch1 = (t) => { reset(); cam(540, 960, 1); Wd.watchInsert(t, 41.875, 'BAMBANG TEGAR', 'CAPRES'); };
+SH.watch1 = (t) => { reset(); cam(540, 960, 1); Wd.watchInsert(t, T.watch1, 'BAMBANG TEGAR', 'CAPRES'); };
 SH.terrace2b = (t) => {
   cam(430, 960, 1.34);
   terraceScene(t, { dim: D(t, { holdR: 'tempe', armR: { h: [60, 80], bend: 40 }, look: [-.6, .7], lid: 0, brow: -.6, ring: 1, mouth: { o: 0, sm: -.3 } }) });
 };
 SH.dimasCU = (t) => {
   const tq = q(t);
-  cam(640, 820, 2.5 + .06 * ss(seg(t, 45, 47.5)));
+  cam(640, 820, 2.5 + .06 * ss(seg(t, ...shotAt(t).slice(0, 2))));
   terraceScene(t, { dim: D(t, { ring: 1, look: [-.5, -.1], lid: 0, pupil: 4, brow: -1, sweat: t * 1.5, lower: t > T.gulp && t < T.gulp + .3 ? .2 : 0, sq: t > T.gulp && t < T.gulp + .3 ? .98 : 1, panic: .35, holdR: 'tempe', armR: { h: [60, 80], bend: 40 } }) });
 };
 SH.bambang = (t) => {
   const tq = q(t);
-  cam(430, 800, 1.22 + .05 * ss(seg(t, 47.5, 54.3)));
+  cam(430, 800, 1.22 + .05 * ss(seg(t, ...shotAt(t).slice(0, 2))));
   const p1 = popOpen(t - T.open1), e = emerge(t, T.open1 + .25);
-  const bam = e > 0 ? B(t, { s: .78 * e, holdR: t > 48.6 ? 'point' : null, armR: t > 48.6 ? { h: [130, 40], bend: -20 } : { h: [60, 130], bend: 20 }, look: [.6, .4] }) : null;
-  const dim = D(t, { lean: -.08 * ss(seg(t, 47.6, 48.0)), look: [-.7, -.6], lid: 0, pupil: 4, brow: -.8, sweat: t, panic: .3, ring: 0, mouth: { o: .15, sm: -.6 }, holdR: 'tempe', armR: { h: [60, 80], bend: 40 } });
+  const bam = e > 0 ? B(t, { s: .78 * e, holdR: t > T.open1 + 1.1 ? 'point' : null, armR: t > T.open1 + 1.1 ? { h: [130, 40], bend: -20 } : { h: [60, 130], bend: 20 }, look: [.6, .4] }) : null;
+  const dim = D(t, { lean: -.08 * ss(seg(t, T.open1 + .1, T.open1 + .5)), look: [-.7, -.6], lid: 0, pupil: 4, brow: -.8, sweat: t, panic: .3, ring: 0, mouth: { o: .15, sm: -.6 }, holdR: 'tempe', armR: { h: [60, 80], bend: 40 } });
   terraceScene(t, { p1, bam, dim, ibu: I(t, { look: [.5, .3] }) });
 };
 SH.tempe = (t) => {
   const tq = q(t);
   cam(330, 860, 1.4);
-  const give = ss(seg(t, 54.9, 55.3)), took = t > T.take;
-  const bam = B(t, { holdR: took ? 'tempe' : null, bite: t > T.chomp, cheek: t > T.chomp, armR: took ? { h: lerp(130, 70, ss(seg(t, T.take, T.take + .3))) > 0 ? [lerp(160, 70, ss(seg(t, T.take, 56.0))), lerp(150, -20, ss(seg(t, T.take, 56.0)))] : [70, 0], bend: 20 } : { h: [lerp(60, 160, ss(seg(t, 54.5, 55.4))), lerp(130, 150, ss(seg(t, 54.5, 55.4)))], bend: 20 }, look: [.2, .5], lid: took ? .1 : .3, mouth: t > T.chomp ? { o: (Math.floor(tq * 8) % 2) * .2, sm: .8 } : undefined });
+  const give = ss(seg(t, T.offer - .1, T.offer + .3)), took = t > T.take;
+  const bam = B(t, { holdR: took ? 'tempe' : null, bite: t > T.chomp, cheek: t > T.chomp, armR: took ? { h: lerp(130, 70, ss(seg(t, T.take, T.take + .3))) > 0 ? [lerp(160, 70, ss(seg(t, T.take, T.chomp))), lerp(150, -20, ss(seg(t, T.take, T.chomp)))] : [70, 0], bend: 20 } : { h: [lerp(60, 160, ss(seg(t, T.offer - .5, T.offer + .4))), lerp(130, 150, ss(seg(t, T.offer - .5, T.offer + .4)))], bend: 20 }, look: [.2, .5], lid: took ? .1 : .3, mouth: t > T.chomp ? { o: (Math.floor(tq * 8) % 2) * .2, sm: .8 } : undefined });
   const ib = I(t, { armR: { h: [lerp(86, 110, give), lerp(60, -230, give)], bend: 20 }, holdR: took ? null : (give > .2 ? 'tempe' : 'sutil'), look: [.2, -.6] });
   terraceScene(t, { p1: 1, bam, ibu: ib });
 };
-SH.watch2 = (t) => { reset(); cam(540, 960, 1); Wd.watchInsert(t, 56.25, 'SEKAR KENCANA', 'CAPRES'); };
+SH.watch2 = (t) => { reset(); cam(540, 960, 1); Wd.watchInsert(t, T.watch2, 'SEKAR KENCANA', 'CAPRES'); };
 SH.sekar = (t) => {
-  cam(700, 800, 1.22 + .04 * ss(seg(t, 58.125, 61)));
+  cam(700, 800, 1.22 + .04 * ss(seg(t, ...shotAt(t).slice(0, 2))));
   const p2 = popOpen(t - T.open2), e = emerge(t, T.open2 + .25);
   const sek = e > 0 ? Sk(t, { s: .78 * e }) : null;
   const dim = D(t, { look: [.7, -.6], lid: 0, pupil: 4, brow: -.8, sweat: t, panic: .2, mouth: { o: .1, sm: -.5 }, holdR: 'tempe', armR: { h: [60, 80], bend: 40 } });
@@ -225,23 +226,23 @@ function whipStreak(t, t0, dir) {
   reset(); for (let i = 0; i < 16; i++) { const y = hash(i) * H, x = (hash(i + 4) * W + dir * u * 2400) % (W + 400) - 200; stroke([[x, y], [x + dir * 500, y]], 10, { line: 'rgba(27,20,34,.5)', boil: 0 }); }
 }
 SH.whipB = (t) => {
-  const u = ss(seg(t, 61.0, 61.18));
+  const wa = shotNamed('whipB')[0], u = ss(seg(t, wa, wa + .18));
   const bx = TER.p1[0] + 40, by = TER.p1[1] - 140;
   cam(lerp(TER.p2[0] - 40, bx, u), lerp(TER.p2[1] - 130, by, u), 2.1);
   terraceScene(t, { p1: 1, p2: 1, bam: B(t, { cheek: 1, holdR: 'tempe', armR: { h: [70, -20], bend: 20 }, look: [1, -.1], lid: 0, brow: .8, mouth: talk('BAMBANG', t).talking ? { o: talk('BAMBANG', t).o * .7, w: .8, sm: -.6 } : { o: 0, sm: -.4 } }), sek: Sk(t) });
-  whipStreak(t, 61.0, -1);
+  whipStreak(t, wa, -1);
 };
 SH.whipS = (t) => {
-  const u = ss(seg(t, 62.2, 62.38));
+  const wa = shotNamed('whipS')[0], u = ss(seg(t, wa, wa + .18));
   const sx = TER.p2[0] - 40, sy = TER.p2[1] - 120;
   cam(lerp(TER.p1[0] + 40, sx, u), lerp(TER.p1[1] - 140, sy, u), 2.1);
   terraceScene(t, { p1: 1, p2: 1, bam: B(t, { cheek: 1, holdR: 'tempe', armR: { h: [70, -20], bend: 20 }, look: [1, -.1], lid: .1, brow: .8, mouth: { o: 0, sm: -.4 } }), sek: Sk(t, { look: [-1, -.2], lid: .58, mouth: talk('SEKAR', t).talking ? undefined : { o: 0, sm: .7 } }) });
-  whipStreak(t, 62.2, 1);
+  whipStreak(t, wa, 1);
 };
 // HENING: wide simetris, dorong sangat lambat
 SH.standoff = (t) => {
-  cam(540, 900, 1.0 + .07 * ss(seg(t, 64.375, 68.75)));
-  const lookWajan = t > 67.6;
+  cam(540, 900, 1.0 + .07 * ss(seg(t, ...shotAt(t).slice(0, 2))));
+  const lookWajan = t > LINE.i4.t0 + 1.5;
   terraceScene(t, {
     p1: 1, p2: 1,
     bam: B(t, { cheek: 1, holdR: 'tempe', armR: { h: [70, -20], bend: 20 }, look: [1, -.1], lid: .1, brow: .9, mouth: { o: 0, sm: -.5 } }),
@@ -253,12 +254,12 @@ SH.standoff = (t) => {
 // METER: CU membeku + HUD
 SH.meters = (t) => {
   cam(640, 880, 2.4);
-  const tf = 68.75;
+  const tf = T.metA;
   terraceScene(tf, { p1: 1, p2: 1, burnt: 1, smoke: .5,
     dim: D(tf, { look: [0, 0], lid: 0, pupil: 4, brow: -.9, sweat: 0, mouth: { o: 0, sm: -.7 }, holdR: 'tempe', armR: { h: [60, 80], bend: 40 } }),
     bam: B(tf, { cheek: 1, holdR: 'tempe', armR: { h: [70, -20], bend: 20 }, look: [1, -.1] }), sek: Sk(tf) });
   reset(); screenRect('#171437', .25);
-  meterHUD(t, 68.9);
+  meterHUD(t, T.metA + .15);
 };
 const METERS = [['pop', 'POPULARITAS', 40, '#ffd36e'], ['kota', 'KONDISI KOTA', 85, '#7fd6c8'], ['elite', 'RESTU ELITE', 20, '#e8b84a'], ['nurani', 'HATI NURANI', 90, '#f2ead0']];
 function meterHUD(t, t0) {
@@ -283,7 +284,7 @@ SH.choices = (t) => {
   reset(); screenRect('#171437');
   for (let i = 0; i < 40; i++) dot(hash(i) * W, hash(i + 3) * H, 3 + hash(i + 1) * 4, '#f7f3e8');
   reset();
-  const hs = back(seg(t, 72.8, 73.1), 2);
+  const hs = back(seg(t, T.chA + .3, T.chA + .6), 2);
   push(); translate(540, 300); scale(hs);
   text('MALAM INI AKU', 0, -50, { font: '400 92px "Titan One"', fill: '#ffd36e', outlineW: 16, outlineCol: INK });
   text('HARUS JAWAB APA?', 0, 60, { font: '400 88px "Titan One"', fill: '#ffd36e', outlineW: 16, outlineCol: INK });
@@ -291,7 +292,7 @@ SH.choices = (t) => {
   const ts = [T.choiceA, T.choiceB, T.choiceC];
   CH.forEach(([k, txt, col], i) => {
     const s = back(seg(q(t), ts[i], ts[i] + .22), 2.2); if (s <= 0) return;
-    const bump = 1 + .04 * Math.max(0, Math.sin((t - 76.25) * Math.PI / BEAT)) * (t > 76.25 && Math.floor((t - 76.25) / BEAT) % 3 === i ? 1 : 0);
+    const bump = 1 + .04 * Math.max(0, Math.sin((t - T.cta) * Math.PI / BEAT)) * (t > T.cta && Math.floor((t - T.cta) / BEAT) % 3 === i ? 1 : 0);
     reset(); push(); translate(540, 600 + i * 230); rotate((i - 1) * .02); scale(s * bump);
     shape(rect(-470, -95, 940, 190), { fill: '#f2ead0', lw: 8, shade: () => { for (let x = -470; x < 470; x += 60) stroke([[x, -95], [x, 95]], 3, { line: '#d6c9a6' }); } });
     shape(ell(-370, 0, 70, 70, 30), { fill: col, lw: 7 });
@@ -312,12 +313,12 @@ SH.choices = (t) => {
 };
 // TELUR PASKAH: dorong ke teks berjalan di TV
 SH.egg = (t) => {
-  const u = eio(seg(t, 81.25, 82.6));
+  const u = eio(seg(t, T.egg, T.egg + 1.35));
   cam(lerp(540, TER.tv[0] - 20, u), lerp(900, TER.tv[1] - 12, u), lerp(1.0, 4.2, u));
   terraceScene(t, { p1: 1, p2: 1, egg: 1,
     bam: B(t, { cheek: 1, holdR: 'tempe', armR: { h: [70, -20], bend: 20 }, look: [1, -.1], lid: .1, brow: .9, mouth: { o: 0, sm: -.5 } }), sek: Sk(t, { look: [-1, -.1], lid: .6 }),
     dim: D(t, { look: [0, -.2], lid: 0, pupil: 3.6, brow: -1, mouth: { o: 0, sm: -.6 }, holdR: 'tempe', armR: { h: [60, 80], bend: 40 } }) });
-  if (t > 83.1) { reset(); screenRect('#000'); }
+  if (t > T.egg + 1.85) { reset(); screenRect('#000'); }
 };
 
 // ———————————————————— lapisan layar ————————————————————
@@ -345,27 +346,26 @@ function tag(t) {
   }
 }
 function badge(t) {
-  if (t < 4.4 || t >= 72.5 || (t >= 32.5 && t < 36.875) || shotAt(t)[2].startsWith('watch')) return;
+  const nm = shotAt(t)[2]; if (['hook', 'wipeIn', 'title', 'choices', 'egg'].includes(nm) || nm.startsWith('watch')) return;
   reset(); translate(905, 205);
   shape(rr(-95, -34, 190, 68, 16), { fill: '#1b1422', lw: 6 });
   text('EP 1/30', 0, 2, { font: '400 50px VT323', fill: '#ffd36e' });
 }
 // subtitle: Baloo 2 ExtraBold putih bertepi hitam + pill penutur; dinaikkan di atas UI Reels
-const CUTS = [3.75, 8.75, 15.0, 24.375, 32.5, 64.375, 68.75, 72.5];
 export const SUBS = Object.values(LINE).map(L => {
   let t1 = L.t0 + Math.max(L.d + .35, .9 + L.sub.length / 17, L.d + .6);
   if (L.sub.length <= 8) t1 = L.t0 + Math.max(L.d + .35, 1.15);
   const cut = CUTS.find(c => c > L.t0 + .1); if (cut && t1 > cut) t1 = Math.max(cut - .02, L.t0 + L.d + .2);
-  const nxt = Object.values(LINE).filter(M => M.t0 > L.t0 + .05 && M.who === L.who).sort((a, b) => a.t0 - b.t0)[0];
+  const nxt = Object.values(LINE).filter(M => M.t0 > L.t0 + .05).sort((a, b) => a.t0 - b.t0)[0];
   if (nxt && t1 > nxt.t0 - .02) t1 = nxt.t0 - .02;
   return { id: L.id, t0: L.t0, t1: +t1.toFixed(3), who: L.who, text: L.sub };
 });
 function wrapSub(str) {
   g.setTransform(1, 0, 0, 1, 0, 0); g.font = '800 54px "Baloo 2"';
-  if (g.measureText(str).width < 900) return [str];
-  const mid = str.length / 2; let best = -1;
-  for (let i = 0; i < str.length; i++) if (str[i] === ' ' && (best < 0 || Math.abs(i - mid) < Math.abs(best - mid))) best = i;
-  return [str.slice(0, best), str.slice(best + 1)];
+  const out = []; let cur = '';
+  for (const w of str.split(' ')) { const nx = cur ? cur + ' ' + w : w; if (g.measureText(nx).width > 920 && cur) { out.push(cur); cur = w; } else cur = nx; }
+  if (cur) out.push(cur);
+  return out;
 }
 const WHO_LABEL = { BATIN: 'DIMAS · BATIN' };
 function subs(t) {
@@ -396,50 +396,43 @@ function render(t) {
   wipe(t);
   tag(t);
   badge(t);
-  if (!(t >= 72.5 && t < 81.25) && !(t >= 32.5 && t < 36.875)) subs(t);
+  if (!['title', 'choices', 'egg'].includes(shotAt(t)[2])) subs(t);
 }
 
 // —— event suara untuk mix.py / score.py ——
 function events() {
   const ev = [], add = (type, t, o = {}) => ev.push({ type, t: +t.toFixed(3), ...o });
-  for (const L of Object.values(LINE)) add('vo', L.t0, { id: L.id, who: L.who, d: L.d });
+  for (const L of Object.values(LINE)) add('vo', L.t0, { id: L.id, who: L.who, d: L.d, raw: L.raw });
   for (const [a, b, name] of CUES) add('cue', a, { name, d: +(b - a).toFixed(3) });
+  for (const [a, b] of SILENCES) add('silence', a, { d: +(b - a).toFixed(3) });
   let cur = null;
   for (const [a, b, , w] of SHOTS) { if (cur && cur.w === w) cur.b = b; else { if (cur) add('amb', cur.a, { w: cur.w, d: +(cur.b - cur.a).toFixed(3) }); cur = { a, b, w }; } }
   add('amb', cur.a, { w: cur.w, d: +(cur.b - cur.a).toFixed(3) });
+  const S0 = n => shotNamed(n)[0];
   // hook
-  add('portalHum', 0, { d: 2.6, v: .7 }); add('jitter', 0.1, { d: 2.4 });
-  add('scratch', T.freeze); add('portalWhoosh', 3.55); add('suck', 3.6);
+  add('portalHum', 0, { d: T.freeze, v: .7 }); add('jitter', 0.1, { d: T.freeze - .2 });
+  add('scratch', T.freeze); add('portalWhoosh', T.hookEnd - .2); add('suck', T.hookEnd - .15);
   for (const [tc] of WIPES) add('portalWhoosh', tc - .2);
-  // tanggul
-  add('whoosh', 5.2, { v: .5 }); add('whoosh', 7.4, { v: .4 });
-  // banjir ×3 + reaksi
-  add('stinger', 8.75, { n: 0 }); add('stinger', 10.0, { n: 1 }); add('stinger', 11.25, { n: 2 });
-  add('blub', 9.1); add('glorp', 10.3); add('ticket', 11.5);
-  // asal-usul
-  add('hover', 15.0, { d: 3.0 }); add('click', T.photo); add('beep', T.sent); add('beep', T.sent + .9, { v: .6 }); add('stamp', T.zero);
+  add('whoosh', T.damA + .8, { v: .5 }); add('whoosh', T.damA + 3.0, { v: .4 });
+  T.stingers.forEach((x, n) => add('stinger', x, { n }));
+  add('blub', T.stingers[0] + .3); add('glorp', T.stingers[1] + .3); add('ticket', T.stingers[2] + .3);
+  add('hover', T.potA, { d: 3.0 }); add('click', T.photo); add('type', T.phone, { d: 1.6 }); add('beep', T.sent); add('beep', T.sent + .9, { v: .6 }); add('stamp', T.zero);
   T.coins.forEach((c, i) => add('coin', c + .33, { n: i }));
-  // kota
-  add('boing', 24.55, { v: .6 }); add('whoosh', 26.0, { v: .4 });
-  add('type', 28.6, { d: 1.1 });
-  // judul
-  add('slam', 32.6); add('punch', 33.4); add('type', 33.0, { d: .8 });
-  // teras
-  add('type', 37.0, { d: .9 });
+  add('boing', LINE.v1.t0, { v: .6 }); add('whoosh', T.cityA + 1.6, { v: .4 });
+  add('type', TAGS[2][0], { d: 1.1 });
+  add('slam', T.title[0] + .1); add('punch', T.title[0] + .9); add('type', T.title[0] + .5, { d: .8 });
+  add('type', TAGS[3][0], { d: .9 });
   add('buzz', T.buzz1, { d: 2.2 }); add('gulp', T.gulp);
-  add('portalOpen', T.open1); add('portalHum', T.open1 + .1, { d: 83.0 - T.open1 - .1, v: .45 }); add('boing', T.open1 + .3, { v: .5 });
-  add('pop', 54.95); add('pop', T.take, { v: .7 }); add('chomp', T.chomp); add('chomp', T.chomp + .3, { v: .7 });
+  add('portalOpen', T.open1); add('portalHum', T.open1 + .1, { d: DUR - .5 - T.open1 - .1, v: .45 }); add('boing', T.open1 + .3, { v: .5 });
+  add('pop', T.offer); add('pop', T.take, { v: .7 }); add('chomp', T.chomp); add('chomp', T.chomp + .3, { v: .7 });
   add('buzz', T.buzz2, { d: 2.1 });
   add('portalOpen', T.open2, { v: .8 }); add('boing', T.open2 + .3, { v: .5 });
-  add('whip', 61.0); add('whip', 62.2);
-  // hening
-  for (let s = 65; s <= 68; s++) add('tick', s);
-  add('sizzleBurn', 65.4, { d: 3.3 });
-  // meter, pilihan
-  for (let i = 0; i < 4; i++) add('blip', 68.9 + i * .18, { n: i });
-  add('pop', 72.8); add('pop', T.choiceA); add('pop', T.choiceB); add('pop', T.choiceC); add('boing', T.cta);
-  // telur paskah
-  add('blip', 83.1, { n: 7 });
+  add('whip', S0('whipB')); add('whip', S0('whipS'));
+  for (let x = Math.ceil(T.silence[0]); x < LINE.i4.t0 + 1.5; x++) add('tick', x);
+  add('sizzleBurn', T.silence[0] + 1.0, { d: 3.3 });
+  for (let i = 0; i < 4; i++) add('blip', T.metA + .15 + i * .18, { n: i });
+  add('pop', T.chA + .3); add('pop', T.choiceA); add('pop', T.choiceB); add('pop', T.choiceC); add('boing', T.cta);
+  add('blip', T.egg + 1.85, { n: 7 });
   return ev.sort((a, b) => a.t - b.t);
 }
 
