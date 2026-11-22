@@ -16,4 +16,6 @@ Semua gambar, musik, dan efek suara dibuat dengan kode, tanpa ElevenLabs. Suara 
 | `audio.py` | skor, foley, ambience, dan mix |
 | `build.sh` | bangun ulang semuanya dengan satu perintah |
 
+**Kanon tokoh:** nama lengkap **Dimas Sukma Wardhana**, julukan **"Dimas Ngarep"** (nama di formulir Ep 1 adalah julukannya). Instagram: **@dimasskmwrdhn**.
+
 Untuk memasukkan suara: simpan rekaman ke `voices/<id>.wav`, lalu jalankan `sh build.sh`.

@@ -28,7 +28,7 @@ Semua gambar, tokoh, musik, dan efek suara dibuat dengan kode. **Tanpa ElevenLab
 
 | Tokoh | Desain | Siluet |
 |---|---|---|
-| **Dimas** (28) | kurus, rambut berantakan, kemeja putih lengan digulung, lanyard pemkot, **jam-tangan-telepon** di pergelangan | tinggi kurus, rambut jabrik ke depan |
+| **Dimas Sukma Wardhana** (28), julukan warga "Dimas Ngarep" | kurus, rambut berantakan, kemeja putih lengan digulung, lanyard pemkot, **jam-tangan-telepon** di pergelangan | tinggi kurus, rambut jabrik ke depan |
 | **Dimas muda (kilas balik)** | sama, memakai jaket ojol warna bata dan helm | helm bulat |
 | **Ibu** (55) | daster batik, kerudung instan, sutil, deadpan total | bulat, kerudung segitiga |
 | **Bambang Tegar** (62) | gemuk, batik ungu tua, cincin akik raksasa, kacamata emas | bulat besar, kepala kecil |
