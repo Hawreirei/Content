@@ -53,14 +53,14 @@ const PAT = {};
 // ---------------------------------------------------------------- camera: [t, x, y, z, ease]
 const CAM = [
   [0, 540, 960, 1.0], [T.pull0, 540, 960, 1.0], [T.pull1, 540, 1150, 0.62, 'io'], [T.push, 560, 1420, 0.9, 'io'], [T.whip, 600, 1430, 0.9, 'io'],
-  [T.t0, 1560, 1560, 0.85, 'io'],
+  [T.t0, 1560, 1680, 0.85, 'io'],
 ];
 function camAt(t) {
   let f, z;
-  if (t >= T.t0 && t < T.t1 + .4) { const x = clamp(dX(dayAt(t)) + 140, 1560, 3560); f = [x, 1560]; z = .85; }
+  if (t >= T.t0 && t < T.t1 + .4) { const x = clamp(dX(dayAt(t)) + 140, 1560, 3560); f = [x, 1680]; z = .85; }
   else if (t >= T.t1 + .4) {
-    const k = [[T.t1 + .4, 3560, 1560, .85], [T.ruleOut, 2620, 1640, .4, 'io'], [T.toTree, 2620, 1640, .4], [T.tree, 2620, 2780, .85, 'io'],
-      [T.toBonus, 2620, 2780, .85], [T.bonus, 2620, 3800, .85, 'io'], [T.cta - .6, 2620, 3800, .85], [T.cta + .2, 2620, 4560, .85, 'io'], [T.out, 2620, 4560, .85], [T.end, 2050, 2430, .225, 'io'], [DUR, 2050, 2430, .218, 'lin']];
+    const k = [[T.t1 + .4, 3560, 1680, .85], [T.ruleOut, 2620, 1640, .4, 'io'], [T.toTree, 2620, 1640, .4], [T.tree, 2620, 2960, .85, 'io'],
+      [T.toBonus, 2620, 2960, .85], [T.bonus, 2620, 3800, .85, 'io'], [T.cta - .6, 2620, 3800, .85], [T.cta + .2, 2620, 4560, .85, 'io'], [T.out, 2620, 4560, .85], [T.end, 2050, 2430, .225, 'io'], [DUR, 2050, 2430, .218, 'lin']];
     let i = 1; while (i < k.length - 1 && t > k[i][0]) i++;
     const a = k[i - 1], b = k[i], u = EASE[b[4] || 'io'](clamp((t - a[0]) / (b[0] - a[0]), 0, 1));
     f = [lerp(a[1], b[1], u), lerp(a[2], b[2], u)]; z = Math.exp(lerp(Math.log(a[3]), Math.log(b[3]), u));
@@ -228,21 +228,23 @@ function ctaCard(g, tq) {   // after the challenge: ask what to explain next
   rich(g, 'c-3', [['tulis di komentar ↓', C.ink]], 0, 130, 54);
   g.restore();
 }
-// the channel name: a fixed watermark at 40 % opacity, a quarter of the way down the frame
+// the bottom block (fixed screen layout): caption box ends at CAP_BOTTOM, the channel watermark sits right under it,
+// and everything below y 1560 is left to the app UI (TikTok / Shorts / Reels name + description). Story content stays in y 160–1380.
+const CAP_BOTTOM = 1480, WM_Y = 1530;
 function watermark(g, t) {   // stays off the hook card (the thumbnail), fades in when the camera first pulls back
   const a = clamp((t - 5.2) / .6, 0, 1); if (a <= 0) return;
-  g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = .4 * a; g.font = '56px Lilita'; g.letterSpacing = '10px'; g.textAlign = 'center'; g.textBaseline = 'middle';
-  g.lineJoin = 'round'; g.lineWidth = 8; g.strokeStyle = '#FBF3DF'; g.strokeText('HAWREIREI', W / 2 + 5, H / 4); g.fillStyle = C.ink; g.fillText('HAWREIREI', W / 2 + 5, H / 4);
-  g.letterSpacing = '0px'; noteText(g, 'wm', 'HAWREIREI', W / 2 - 230, H / 4 - 34, W / 2 + 240, H / 4 + 34); TXT[TXT.length - 1].pass = true; g.restore();
+  g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = .4 * a; g.font = '40px Lilita'; g.letterSpacing = '10px'; g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.lineJoin = 'round'; g.lineWidth = 7; g.strokeStyle = '#FBF3DF'; g.strokeText('HAWREIREI', W / 2 + 5, WM_Y); g.fillStyle = C.ink; g.fillText('HAWREIREI', W / 2 + 5, WM_Y);
+  g.letterSpacing = '0px'; noteText(g, 'wm', 'HAWREIREI', W / 2 - 180, WM_Y - 24, W / 2 + 190, WM_Y + 24); TXT[TXT.length - 1].pass = true; g.restore();
 }
 
 // ---------------------------------------------------------------- the host: the creator's puppet, hopping along with the camera
-const HOST = [[0, 880, 1330], [T.whip - .1, 880, 1330], [T.t0, 1560, 2100, 'io']];
+const HOST = [[0, 880, 1330], [T.whip - .1, 880, 1330], [T.t0, 1560, 1980, 'io']];
 function hostAt(t) {
   let x, y, hopping = false;
-  if (t >= T.t0 && t < T.t1 + .3) { x = Math.max(1560, dX(dayAt(t)) - 330); y = 2100; hopping = true; }
+  if (t >= T.t0 && t < T.t1 + .3) { x = Math.max(1560, dX(dayAt(t)) - 330); y = 1980; hopping = true; }
   else if (t >= T.t1 + .3) {
-    const k = [[T.t1 + .3, dX(13) - 330, 2100], [T.toTree, dX(13) - 330, 2100], [T.tree + .2, 3150, 3080, 'io'], [T.toBonus, 3150, 3080], [T.bonus + .4, 2120, 4060, 'io'], [T.cta - .5, 2120, 4060], [T.cta + .4, 2130, 4850, 'io'], [DUR, 2130, 4850]];
+    const k = [[T.t1 + .3, dX(13) - 330, 1980], [T.toTree, dX(13) - 330, 1980], [T.tree + .2, 3150, 3080, 'io'], [T.toBonus, 3150, 3080], [T.bonus + .4, 2120, 4060, 'io'], [T.cta - .5, 2120, 4060], [T.cta + .4, 2130, 4850, 'io'], [DUR, 2130, 4850]];
     let i = 1; while (i < k.length - 1 && t > k[i][0]) i++;
     const a = k[i - 1], b = k[i], u = EASE[b[3] || 'io'](clamp((t - a[0]) / (b[0] - a[0]), 0, 1)); x = lerp(a[1], b[1], u); y = lerp(a[2], b[2], u) - Math.sin(Math.PI * u) * (u > 0 && u < 1 ? 260 : 0);
   } else {
@@ -314,14 +316,14 @@ function renderFilm(t) {
 }
 // a caption box at the bottom (≤ 2 balanced lines)
 function caption(t) {
-  const i = CAPS.findIndex(([a, b]) => t >= a && t < b); if (i < 0) return;
+  const i = CAPS.findIndex(([a, b]) => t >= a && t < b); if (i < 0 || t < T.pull0 || CAPS[i][0] < 2) return;   // hook card = caption (the first caption is the card itself)
   const [a, b, tx] = CAPS[i], g = MAIN, size = 56, fam = 'Fell';
   const wOf = s => mWidth(g, mParse(s), size, fam);
   let lines = [tx];
   if (wOf(tx) > 900) { const ws = tx.split(' '); let best = null; for (let k = 1; k < ws.length; k++) { const A = ws.slice(0, k).join(' '), B = ws.slice(k).join(' '), m = Math.max(wOf(A), wOf(B)); if (!best || m < best.m) best = { m, L: [A, B] }; } lines = best.L; }
   const u = EASE.o(clamp((t - a) / 0.14, 0, 1)), v = clamp((b - t) / 0.1, 0, 1);
   g.save(); g.setTransform(1, 0, 0, 1, 0, 0);
-  const lh = 72, w = Math.max(...lines.map(wOf)) + 84, h = lines.length * lh + 48, x = W / 2 - w / 2, y = 1640 - h + (1 - u) * 18 + (1 - v) * 10;
+  const lh = 72, w = Math.max(...lines.map(wOf)) + 84, h = lines.length * lh + 48, x = W / 2 - w / 2, y = CAP_BOTTOM - h + (1 - u) * 18 + (1 - v) * 10;
   g.globalAlpha = Math.min(u, v);
   g.shadowColor = 'rgba(30,20,10,.38)'; g.shadowBlur = 12; g.shadowOffsetX = 5; g.shadowOffsetY = 8;
   g.fillStyle = C.caption; g.fillRect(x, y, w, h); g.shadowColor = 'transparent';

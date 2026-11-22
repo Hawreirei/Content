@@ -31,12 +31,12 @@ Aturan pedagogis dan audit 5 pertanyaan di skill /vmath (bagian 2 dan 2b) tetap 
 
 - 1080×1920, 24 fps. Elemen terlihat bergerak "on twos" (`twos(t)`), kamera halus.
 - **Kartu hook** di koordinat dunia (540, 560) dengan kamera z = 1 di frame 1; teks hook harus utuh di frame 1.
-- **Watermark** "HAWREIREI": Lilita 56 px, letterSpacing 10, isi tinta + tepi krem, opasitas 40%, di (W/2, H/4). Muncul pelan mulai 5,2 dtk (setelah hook) dan ditandai `pass` untuk readcheck.
-  - **Aturan tata letak:** saat kartu sedang dibaca, jangan taruh teks kartu di pita layar y ≈ 430–530. Geser kartu atau kamera supaya watermark jatuh di area kosong. Di film KPK, judul "12 hari kemudian" dan "jawab di komentar ↓" masih tertimpa; perbaiki di film berikutnya.
-- **Caption** = narasi persis seperti diucapkan, dengan ejaan tampilan dan angka berupa digit.
-  - Kotak krem bergaris tinta, font IM Fell 56 px.
-  - Paling banyak 2 baris seimbang dan lebar 900 px.
-  - Sisi bawah di y 1640.
+- **Blok bawah (tata letak tetap di layar):**
+  - Caption = narasi persis seperti diucapkan, dengan ejaan tampilan dan angka berupa digit. Kotak krem bergaris tinta, IM Fell 56 px, paling banyak 2 baris seimbang dan lebar 900 px. **Sisi bawah di y 1480** (`CAP_BOTTOM`).
+  - **Watermark** "HAWREIREI" tepat di bawah caption: Lilita 40 px, letterSpacing 10, isi tinta + tepi krem, opasitas 40%, di (W/2, **y 1530**) (`WM_Y`). Muncul pelan mulai 5,2 dtk dan ditandai `pass` untuk readcheck.
+  - **Di bawah y 1560 tidak ada apa pun yang penting**: area itu ditutupi UI aplikasi (nama akun, deskripsi, judul lagu di TikTok/Shorts/Reels).
+- **Konten cerita di y 160–1380 layar.** Atur kamera (f y) supaya tokoh, kartu, dan rumus selesai di atas kotak caption. Kalau ada yang tertutup, geser kamera, jangan geser blok bawah.
+- **Kartu hook = caption pembuka.** Selama kartu hook memenuhi layar (sebelum pull-back pertama), kotak caption tidak ditampilkan karena narasinya sudah tertulis di kartu. Kartu hook harus di y 240–1680 agar utuh di grid profil TikTok (potongan 3:4).
 - **Zona aman:** konten penting di x 60–940. Jangan ada apa pun yang penting di kanan (x > 900) pada y 900–1500 (tombol TikTok).
 - **Huruf cetak di kartu:** Lilita One.
   - Angka kuning `#F2B632` bertepi tinta.
@@ -129,7 +129,8 @@ $F/review.sh 0.5 8 22 40 58      # contact sheet → review/sheet.jpg
 ## 9. Jebakan yang sudah ditemukan
 
 - **Suara mendahului gambar** disebabkan wav 44,1 kHz yang dicampur ke mix 48 kHz. Selalu lewat `voice_prep.py`. Memindahkan keyframe visual tidak menyelesaikan masalah ini.
-- Watermark di H/4 menutupi kartu hook. Karena itu watermark baru muncul setelah 5,2 dtk.
+- Watermark di tengah layar (H/4) menimpa teks kartu. Karena itu watermark dipindah ke footer, tepat di bawah caption.
+- Caption yang sisi bawahnya di y 1640 masuk area UI aplikasi; batasnya y 1480.
 - `rich()` memberi tepi tinta pada setiap potongan berwarna. Kalimat panjang berwarna jadi gemuk, jadi warna hanya untuk angka, nama, dan frasa pendek; sisanya `C.ink`.
 - Butir/benda kecil di hook tak terbaca di thumbnail. Zoom kamera hook ≥ 1,9 atau benda diperbesar.
 - Balon atau label yang muncul terlalu dekat dengan perpindahan kamera gagal readcheck. Majukan 0,3–0,6 dtk.
