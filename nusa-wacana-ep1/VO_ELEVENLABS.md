@@ -136,16 +136,16 @@ Model: **Eleven v3**. Tag ekspresi `[...]` ditulis dalam bahasa Inggris karena v
 [cheerfully, calling out] Pak Wali!
 ```
 
-## Versi sekaligus (satu kali generate)
+## Versi sekaligus, gaya narasi (dipakai)
 
-Tempel blok di bawah ini sekaligus, lalu kirim satu file hasilnya. Nanti saya potong per baris berdasarkan jeda antarbaris.
+Semua dibacakan oleh Dimas sebagai pencerita, dengan keterangan siapa yang bicara ("kata Pak Bambang", "Ibu bilang"). Tempel sekaligus di Eleven v3, lalu kirim satu file hasilnya.
 
 ```
-[shouting] Dik Dimas!
+[imitating a deep, booming voice] "Dik Dimas!" [normal voice] teriak Pak Bambang.
 
-[sharply] Mas Dimas!
+[imitating a sharp, cold voice] "Mas Dimas!" [normal voice] sahut Bu Sekar.
 
-[panicked, shouting] Aku cuma WALI KOTA!
+[panicked, shouting] "Aku cuma WALI KOTA!" [breathless] teriakku.
 
 [flatly] Kok bisa begini?
 
@@ -165,33 +165,33 @@ Tempel blok di bawah ini sekaligus, lalu kirim satu file hasilnya. Nanti saya po
 
 [quietly proud] Jadi aku nyalon sendiri... Modal patungan warga.
 
-[cheerfully, calling out] Pak Wali!
+[cheerfully] "Pak Wali!" panggil warga.
 
 [warmly] Sekarang umurku dua puluh delapan... dan aku wali kotanya.
 
 [dryly] Di Nusa Wacana, itu sah.
 
-[deadpan, slowly] Makan dulu, Le. [sighs] Wali kota juga butuh gorengan.
+[fondly] Malam itu Ibu bilang, [imitating a slow, flat voice] "Makan dulu, Le. Wali kota juga butuh gorengan."
 
-[mouth full, casual] Iya, Bu.
+[mouth full] "Iya, Bu," jawabku.
 
-[deadpan, not looking up] Siapa, Le?
+[deadpan] "Siapa, Le?" tanya Ibu, tanpa menoleh.
 
-[whispers, shocked] ...Calon presiden, Bu. [gulps]
+[whispers, shocked] "...Calon presiden, Bu," bisikku. [gulps]
 
-[deep voice, booming, jovial] Dik Dimas! [laughs] Anak muda kayak kamu itu... LAKU.
+[imitating a deep, booming voice] "Dik Dimas! [laughs] Anak muda kayak kamu itu... LAKU," [normal voice] kata Pak Bambang.
 
-[deep voice, patronizing] Jadi wakil saya, ya? Besok pagi... saya tunggu jawabannya.
+[imitating a deep, patronizing voice] "Jadi wakil saya, ya? Besok pagi saya tunggu jawabannya," [normal voice] katanya lagi.
 
-[deadpan] Gorengan, Pak?
+[deadpan] Ibu cuma bilang, "Gorengan, Pak?"
 
-[soft, cold] Mas Dimas. [pause] Jangan jawab Bambang dulu.
+[imitating a soft, cold voice] "Mas Dimas. Jangan jawab Bambang dulu," [normal voice] kata Bu Sekar.
 
-[deep voice, mouth full, surprised] Lho, Sekar?!
+[amused] "Lho, Sekar?!" kata Pak Bambang, mulutnya penuh tempe.
 
-[smug, quietly] Tawaran saya... jauh lebih baik.
+[imitating a smug, quiet voice] "Tawaran saya... jauh lebih baik," [normal voice] kata Bu Sekar.
 
-[deadpan, slowly] Le... tempenya gosong.
+[long pause] Lalu Ibu bilang... [deadpan] "Le... tempenya gosong."
 
 [uncertain, to the audience] Malam ini... aku harus jawab apa?
 ```
