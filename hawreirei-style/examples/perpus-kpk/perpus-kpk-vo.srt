@@ -1,0 +1,59 @@
+1
+00:00:00,310 --> 00:00:05,670
+Ani ke perpustakaan setiap 3 hari sekali. Budi setiap 4 hari sekali.
+
+2
+00:00:05,670 --> 00:00:10,250
+Tanggal 1, mereka bertemu di sana. Tanggal berapa bertemu lagi?
+
+3
+00:00:10,230 --> 00:00:11,790
+Kita ikuti kalendernya.
+
+4
+00:00:11,770 --> 00:00:15,420
+Tanggal 4, Ani datang. Tanggal 5, Budi.
+
+5
+00:00:15,420 --> 00:00:21,130
+Tanggal 7, Ani lagi. Tanggal 9, Budi. Tanggal 10, Ani…
+
+6
+00:00:21,110 --> 00:00:24,530
+Dan tanggal 13… mereka bertemu lagi!
+
+7
+00:00:24,510 --> 00:00:29,670
+Jaraknya 12 hari. 12 itu KPK dari 3 dan 4.
+
+8
+00:00:29,650 --> 00:00:32,050
+Cara cepatnya: tulis kelipatannya.
+
+9
+00:00:32,050 --> 00:00:39,000
+Kelipatan 3: 3, 6, 9, 12. Kelipatan 4: 4, 8, 12.
+
+10
+00:00:38,980 --> 00:00:45,260
+KPK-nya 12. Tapi hati-hati! Mereka bertemu 12 hari setelah tanggal 1.
+
+11
+00:00:45,260 --> 00:00:50,370
+Jadi tanggal 1 + 12… tanggal 13. Bukan 12!
+
+12
+00:00:50,350 --> 00:00:53,980
+Sekarang giliranmu. Cici datang setiap 6 hari sekali.
+
+13
+00:00:53,980 --> 00:00:57,140
+Tanggal berapa ketiganya bertemu lagi? Jawab di komentar!
+
+14
+00:00:57,120 --> 00:00:59,810
+Mau dibahas soal apa lagi? Tulis di komentar, ya!
+
+15
+00:00:59,790 --> 00:01:02,700
+Sampai jumpa di soal berikutnya!
