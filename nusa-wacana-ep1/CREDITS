@@ -1,0 +1,10 @@
+Nusa Wacana EP 1/30 — "Dua Telepon, Satu Malam" · sumber aset dan lisensi
+
+Gambar       Semua tokoh, makhluk, properti, dan latar digambar dengan kode (chars.js, worlds.js, main.js). Tanpa gambar AI, tanpa ElevenLabs.
+Musik        Skor orisinal, disintesis dengan numpy (audio.py). Tanpa sampel.
+Efek suara   Disintesis dengan numpy (audio.py). Tanpa sampel.
+Suara        Belum ada; akan direkam belakangan (lihat VO_SCRIPT.md).
+Font         Baloo 2 (Ek Type), Titan One (Rodrigo Fuenzalida), VT323 (Peter Hull) — Google Fonts, SIL Open Font License 1.1 (fonts/*_OFL.txt).
+Mesin        toon.js, lib.js, serta fungsi eye/mouth/hand di chars.js diadaptasi dari Lemo-Opuscar (https://github.com/lemomo-ai/lemo-opuscar), lisensi MIT, Copyright (c) 2026 Lemomo (LemoLab); teks lisensi di LICENSES/MIT.txt.
+Gaya         Gaya "Sci-Fi Sitcom Toon": terinspirasi kartun sitkom sci-fi dewasa era adult-swim. Tidak memakai tokoh, nama, logo, atau properti dari acara mana pun.
+Isi          Negara, kota, partai, dan tokoh sepenuhnya fiktif.
