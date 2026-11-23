@@ -8,5 +8,5 @@ HERE=$(cd "$(dirname "$0")/.." && pwd); DST=$1
 cp -r "$HERE/template" "$DST"
 rm -f "$DST/vo/el/align.json" "$DST/vo/el/env.json" "$DST/vo/el/lines.txt"
 mkdir -p "$DST/out" "$DST/review"
-sed "s#^D=.*#D=$DST#" "$HERE/tools/review.sh" > "$DST/review.sh"; chmod +x "$DST/review.sh"
+cp "$HERE/tools/review.sh" "$DST/review.sh"; chmod +x "$DST/review.sh"
 echo "new film at $DST (film.js is the KPK example: rewrite its story, keep the style blocks)"
