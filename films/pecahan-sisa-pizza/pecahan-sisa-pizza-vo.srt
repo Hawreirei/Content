@@ -1,0 +1,87 @@
+1
+00:00:00,290 --> 00:00:05,230
+Sisa pizza Ani tinggal 1⁄2. Sisa pizza Budi tinggal 1⁄3.
+
+2
+00:00:05,230 --> 00:00:09,860
+Dua sisa itu digabung ke satu kotak. Kotaknya terisi berapa bagian?
+
+3
+00:00:09,860 --> 00:00:11,610
+Jangan jawab dulu.
+
+4
+00:00:11,610 --> 00:00:13,530
+Banyak yang langsung menjumlahkan:
+
+5
+00:00:13,530 --> 00:00:17,270
+1 + 1, 2 + 3… 2⁄5.
+
+6
+00:00:17,270 --> 00:00:21,430
+Coba lihat. 2⁄5 itu kurang dari setengah kotak.
+
+7
+00:00:21,430 --> 00:00:25,040
+Padahal sisa pizza Ani saja sudah mengisi setengah kotak.
+
+8
+00:00:25,040 --> 00:00:26,780
+Jadi, tidak mungkin.
+
+9
+00:00:26,780 --> 00:00:29,480
+Kita masukkan dua-duanya. Muat…
+
+10
+00:00:29,480 --> 00:00:31,800
+tapi potongannya beda ukuran.
+
+11
+00:00:31,800 --> 00:00:34,370
+Yang beda ukuran tidak bisa langsung dihitung.
+
+12
+00:00:34,370 --> 00:00:37,390
+Jadi kotaknya kita bagi 6, sama besar.
+
+13
+00:00:37,390 --> 00:00:40,750
+Sisa Ani mengisi 3 bagian: 3⁄6.
+
+14
+00:00:40,750 --> 00:00:43,830
+Sisa Budi mengisi 2 bagian: 2⁄6.
+
+15
+00:00:43,830 --> 00:00:48,040
+3 + 2… 5! Kotaknya terisi 5⁄6.
+
+16
+00:00:48,040 --> 00:00:49,650
+Tinggal 1 bagian yang kosong.
+
+17
+00:00:49,650 --> 00:00:54,630
+Kenapa 6? Karena 6 adalah KPK dari 2 dan 3.
+
+18
+00:00:54,630 --> 00:00:57,820
+Samakan dulu penyebutnya, baru jumlahkan pembilangnya.
+
+19
+00:00:57,820 --> 00:01:02,910
+Sekarang giliranmu. Sisa pizza Ani 1⁄3, sisa pizza Cici 1⁄4.
+
+20
+00:01:02,910 --> 00:01:07,100
+Digabung ke satu kotak, terisi berapa bagian? Jawab di komentar!
+
+21
+00:01:07,100 --> 00:01:10,020
+Mau dibahas soal apa lagi? Tulis di komentar, ya!
+
+22
+00:01:10,020 --> 00:01:13,170
+Sampai jumpa di soal berikutnya!
