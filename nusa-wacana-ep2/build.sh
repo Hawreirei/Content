@@ -1,0 +1,14 @@
+#!/bin/sh
+# Bangun ulang seluruh film: gambar → event → suara (skor, foley, dan rekaman suara bila ada) → mux −14 LUFS → srt
+# Butuh: Node 20+ dengan Playwright, ffmpeg, Python 3 dengan numpy, scipy, soundfile
+set -e
+cd "$(dirname "$0")"
+mkdir -p out voices
+node tools/still.mjs 0.6 --events
+[ -f voices/raw.wav ] && python3 tools/cut_vo.py && python3 tools/voice_prep.py
+node tools/render.mjs --workers 4
+node tools/still.mjs 0.6 --events
+python3 audio.py
+sh tools/mux.sh out/video.mp4 out/mix.wav nusa-wacana-ep2.mp4
+python3 tools/srt.py
+cp review/t_0.6.jpg poster.jpg
