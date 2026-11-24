@@ -90,7 +90,7 @@ function drawSheet(g, v) {
 
 // ---------------------------------------------------------------- printed type in Lilita, numbers in yellow with an ink edge
 function rich(g, id, parts, x, y, size, align = 'center') {
-  g.save(); g.font = `${size}px Lilita`; g.textBaseline = 'alphabetic';
+  g.save(); g.font = `${size}px Lilita`; g.textBaseline = 'alphabetic'; g.textAlign = 'left';
   const ws = parts.map(([s]) => g.measureText(s).width), tw = ws.reduce((a, b) => a + b, 0);
   let cx = align === 'center' ? x - tw / 2 : x;
   parts.forEach(([s, col], i) => {

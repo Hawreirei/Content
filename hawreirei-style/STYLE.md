@@ -126,6 +126,10 @@ sh core/render/mux.sh $F/out/video.mp4 $F/out/mix.wav $F/<judul>.mp4 24 1
 $F/review.sh 0.5 8 22 40 58      # contact sheet → review/sheet.jpg
 ```
 
+## 8b. Cek tepi layar
+
+`tools/edges.mjs` (salin ke `$LIB/core/render/`) mendaftar teks yang terpotong tepi kiri/kanan saat kamera diam. Film perlu `window.__ALLTXT` dan `window.__MOVING` (lihat `films/kali-45`). Wajib kosong sebelum render final.
+
 ## 9. Jebakan yang sudah ditemukan
 
 - **Suara mendahului gambar** disebabkan wav 44,1 kHz yang dicampur ke mix 48 kHz. Selalu lewat `voice_prep.py`. Memindahkan keyframe visual tidak menyelesaikan masalah ini.
@@ -135,4 +139,7 @@ $F/review.sh 0.5 8 22 40 58      # contact sheet → review/sheet.jpg
 - Butir/benda kecil di hook tak terbaca di thumbnail. Zoom kamera hook ≥ 1,9 atau benda diperbesar.
 - Balon atau label yang muncul terlalu dekat dengan perpindahan kamera gagal readcheck. Majukan 0,3–0,6 dtk.
 - Teks yang berganti cepat (angka berjalan) diberi `pass` di readcheck.
+- Kamera di kartu 1000 px pakai z 0,85, host di x layar ±95 (k 0,72): host tidak terpotong dan tidak menutup teks kartu.
+- `rich()` harus memaksa `textAlign = 'left'`; kalau tidak, teks ikut rata tengah dari pemanggilan sebelumnya dan bergeser.
+- Baris kartu yang bertetangga diberi jarak ≥ 1.450 px supaya tidak mengintip di atas/bawah layar.
 - Sheet stiker yang posenya terpotong di tepi gambar (close-up) tidak bisa dipakai. Minta sheet ulang dengan margin.
