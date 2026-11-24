@@ -1,0 +1,147 @@
+1
+00:00:00,270 --> 00:00:02,810
+PR Budi dicoret merah.
+
+2
+00:00:02,810 --> 00:00:07,070
+Soalnya: tulis 4 × 5 sebagai penjumlahan berulang.
+
+3
+00:00:07,070 --> 00:00:11,490
+Budi menulis 4 + 4 + 4 + 4 + 4.
+
+4
+00:00:11,490 --> 00:00:14,720
+Kalau dihitung, hasilnya 20. Benar!
+
+5
+00:00:14,720 --> 00:00:16,550
+Lalu… kenapa disalahkan?
+
+6
+00:00:16,550 --> 00:00:18,900
+Ternyata Budi tidak sendirian.
+
+7
+00:00:18,900 --> 00:00:22,720
+Tahun 2014, kasus serupa viral di media sosial.
+
+8
+00:00:22,720 --> 00:00:25,470
+Bahkan dua profesor ikut berbeda pendapat.
+
+9
+00:00:25,470 --> 00:00:27,920
+Jadi, 4 × 5 itu yang mana?
+
+10
+00:00:27,920 --> 00:00:31,620
+4 diulang 5 kali, atau 5 diulang 4 kali?
+
+11
+00:00:31,620 --> 00:00:34,790
+Lihat simbolnya. Di buku kelas 2 dari Kemendikbud,
+
+12
+00:00:34,790 --> 00:00:37,180
+angka di depan adalah banyaknya kelompok,
+
+13
+00:00:37,180 --> 00:00:39,250
+angka di belakang adalah isinya.
+
+14
+00:00:39,250 --> 00:00:43,290
+Jadi 4 × 5: 4 kotak, tiap kotak 5 kue.
+
+15
+00:00:43,290 --> 00:00:45,920
+5 + 5 + 5 + 5.
+
+16
+00:00:45,920 --> 00:00:50,780
+Kalau dibalik, 5 × 4: 5 kotak, tiap kotak 4 kue.
+
+17
+00:00:50,780 --> 00:00:52,940
+Hasilnya sama, gambarnya beda.
+
+18
+00:00:52,940 --> 00:00:55,340
+Di soal cerita, cari kata "tiap".
+
+19
+00:00:55,340 --> 00:00:58,410
+Angka setelah "tiap" itu isinya, taruh di belakang.
+
+20
+00:00:58,410 --> 00:01:01,220
+Apakah ini aturan mutlak? Ternyata bukan.
+
+21
+00:01:01,220 --> 00:01:05,590
+Ini kesepakatan. Di Jepang, urutan artinya justru kebalikannya.
+
+22
+00:01:05,590 --> 00:01:08,520
+Kabar baiknya, hasilnya tidak pernah berubah.
+
+23
+00:01:08,520 --> 00:01:11,710
+Susun kuenya 4 baris isi 5, lalu putar…
+
+24
+00:01:11,710 --> 00:01:14,510
+jadi 5 baris isi 4. Tetap 20.
+
+25
+00:01:14,510 --> 00:01:19,190
+Jadi untuk soal cerita, gambar, atau penjumlahan berulang,
+
+26
+00:01:19,190 --> 00:01:21,830
+ingat ini: depan itu kelompok, belakang itu isi.
+
+27
+00:01:21,830 --> 00:01:24,830
+Kesepakatan ini terpakai sampai SMP.
+
+28
+00:01:24,830 --> 00:01:28,670
+Di aljabar, 3a artinya a + a + a.
+
+29
+00:01:28,670 --> 00:01:31,230
+Jadi coretan merahnya ada dasarnya.
+
+30
+00:01:31,230 --> 00:01:32,620
+Budi tidak salah hitung,
+
+31
+00:01:32,620 --> 00:01:36,030
+dia hanya belum memakai arti simbol yang sama dengan bukunya.
+
+32
+00:01:36,030 --> 00:01:40,190
+Sekarang giliranmu. Ada 3 piring, tiap piring berisi 6 kue.
+
+33
+00:01:40,190 --> 00:01:41,720
+Tulis perkaliannya di komentar!
+
+34
+00:01:41,720 --> 00:01:43,690
+Dan dulu kamu diajari yang mana:
+
+35
+00:01:43,690 --> 00:01:50,130
+4 + 4 + 4 + 4 + 4, atau 5 + 5 + 5 + 5?
+
+36
+00:01:50,130 --> 00:01:51,040
+Tulis juga, ya!
+
+37
+00:01:51,040 --> 00:01:53,790
+Sampai jumpa di soal berikutnya!
