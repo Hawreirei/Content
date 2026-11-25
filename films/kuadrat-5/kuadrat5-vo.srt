@@ -1,0 +1,95 @@
+1
+00:00:00,260 --> 00:00:03,770
+35². Bisa jawab dalam 2 detik?
+
+2
+00:00:03,770 --> 00:00:07,340
+Di lomba hitung cepat, Budi masih sibuk mencoret-coret.
+
+3
+00:00:07,340 --> 00:00:11,360
+Tapi Ani langsung angkat tangan: 1225!
+
+4
+00:00:11,360 --> 00:00:15,270
+Rahasianya begini. Ambil angka depannya: 3.
+
+5
+00:00:15,270 --> 00:00:20,080
+Kalikan dengan angka sesudahnya: 4. 3 × 4, 12.
+
+6
+00:00:20,080 --> 00:00:25,130
+Lalu tempelkan 25 di belakangnya… 1225!
+
+7
+00:00:25,130 --> 00:00:30,010
+Coba lagi. 65²: 6 × 7, 42.
+
+8
+00:00:30,010 --> 00:00:33,850
+Tempel 25: 4225!
+
+9
+00:00:33,850 --> 00:00:37,450
+Tapi hati-hati. Jangan dikali dirinya sendiri.
+
+10
+00:00:37,450 --> 00:00:40,280
+3 × 3, 925?
+
+11
+00:00:40,280 --> 00:00:43,280
+Salah! Harus dengan angka sesudahnya.
+
+12
+00:00:43,280 --> 00:00:48,050
+Kenapa bisa? Bayangkan persegi 35 × 35.
+
+13
+00:00:48,050 --> 00:00:53,350
+Potong jadi persegi 30, dua pita, dan satu kotak kecil 5 × 5.
+
+14
+00:00:53,350 --> 00:00:55,300
+Pindahkan satu pita ke samping…
+
+15
+00:00:55,300 --> 00:00:59,700
+jadilah persegi panjang 30 × 40: 1200.
+
+16
+00:00:59,700 --> 00:01:02,530
+Ditambah kotak kecilnya: 25.
+
+17
+00:01:02,530 --> 00:01:05,540
+Itulah 3 × 4, lalu 25.
+
+18
+00:01:05,540 --> 00:01:10,960
+Angka besar juga bisa: 105², 10 × 11, 110.
+
+19
+00:01:10,960 --> 00:01:12,860
+11025!
+
+20
+00:01:12,860 --> 00:01:15,770
+Dan begitulah Ani menang, dalam 2 detik.
+
+21
+00:01:15,770 --> 00:01:18,820
+Sekarang giliranmu. 95².
+
+22
+00:01:18,820 --> 00:01:21,340
+Jawab di komentar, maksimal 2 detik!
+
+23
+00:01:21,340 --> 00:01:23,860
+Mau trik apa lagi? Tulis di komentar, ya!
+
+24
+00:01:23,860 --> 00:01:26,880
+Sampai jumpa di trik berikutnya!
