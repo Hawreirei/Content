@@ -1,0 +1,103 @@
+1
+00:00:00,260 --> 00:00:04,180
+67² dikurangi 33².
+
+2
+00:00:04,180 --> 00:00:05,890
+Bisa jawab dalam 2 detik?
+
+3
+00:00:05,890 --> 00:00:07,630
+Budi pakai cara biasa:
+
+4
+00:00:07,630 --> 00:00:10,820
+kuadratkan satu per satu, lalu dikurangkan.
+
+5
+00:00:10,820 --> 00:00:14,240
+30 detik, belum selesai juga!
+
+6
+00:00:14,240 --> 00:00:17,890
+Padahal ada rumus SMP yang bisa jadi jalan pintas:
+
+7
+00:00:17,890 --> 00:00:24,370
+a² − b² = (a + b)(a − b).
+
+8
+00:00:24,370 --> 00:00:27,280
+Artinya, cukup jumlahkan dan kurangkan.
+
+9
+00:00:27,280 --> 00:00:30,480
+67 + 33 = 100.
+
+10
+00:00:30,480 --> 00:00:33,790
+67 − 33 = 34.
+
+11
+00:00:33,790 --> 00:00:37,830
+100 × 34… 3400!
+
+12
+00:00:37,830 --> 00:00:39,710
+Simpan dulu, biar nggak lupa.
+
+13
+00:00:39,710 --> 00:00:44,100
+Coba lagi: 75² − 25².
+
+14
+00:00:44,100 --> 00:00:46,710
+Jumlahnya 100, selisihnya 50.
+
+15
+00:00:46,710 --> 00:00:49,320
+100 × 50 = 5000!
+
+16
+00:00:49,320 --> 00:00:50,580
+Tapi hati-hati.
+
+17
+00:00:50,580 --> 00:00:53,480
+Jangan dikurangkan dulu, lalu dikuadratkan.
+
+18
+00:00:53,480 --> 00:00:57,410
+34² = 1156. Salah!
+
+19
+00:00:57,410 --> 00:00:59,810
+Yang benar tetap 3400.
+
+20
+00:00:59,810 --> 00:01:03,030
+Kenapa bisa? Dari persegi sisi 67,
+
+21
+00:01:03,030 --> 00:01:05,330
+potong persegi sisi 33.
+
+22
+00:01:05,330 --> 00:01:09,810
+Sisanya dipindah… jadi persegi panjang 100 × 34.
+
+23
+00:01:09,810 --> 00:01:12,800
+Dan kini, Budi juga bisa dalam 2 detik.
+
+24
+00:01:12,800 --> 00:01:17,540
+Sekarang giliranmu: 58² − 42².
+
+25
+00:01:17,540 --> 00:01:19,320
+Tulis angkanya saja di komentar!
+
+26
+00:01:19,320 --> 00:01:22,410
+Follow untuk trik hitung cepat lainnya!

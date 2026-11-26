@@ -1,0 +1,11 @@
+Enam puluh tujuh kuadrat, dikurangi tiga puluh tiga kuadrat. Bisa jawab dalam dua detik?
+Budi pakai cara biasa: kuadratkan satu per satu, lalu dikurangkan. Tiga puluh detik, belum selesai juga!
+Padahal ada rumus SMP yang bisa jadi jalan pintas: a kuadrat dikurangi b kuadrat, sama dengan a tambah b, dikali a kurang b.
+Artinya, cukup jumlahkan dan kurangkan. Enam puluh tujuh tambah tiga puluh tiga, seratus. Enam puluh tujuh kurang tiga puluh tiga, tiga puluh empat.
+Seratus kali tiga puluh empat... tiga ribu empat ratus! Simpan dulu, biar nggak lupa.
+Coba lagi. Tujuh puluh lima kuadrat, dikurangi dua puluh lima kuadrat. Jumlahnya seratus, selisihnya lima puluh. Seratus kali lima puluh, lima ribu!
+Tapi hati-hati. Jangan dikurangkan dulu, lalu dikuadratkan. Tiga puluh empat kuadrat, seribu seratus lima puluh enam. Salah! Yang benar tetap tiga ribu empat ratus.
+Kenapa bisa? Dari persegi sisi enam puluh tujuh, potong persegi sisi tiga puluh tiga. Sisanya dipindah... jadi persegi panjang, seratus kali tiga puluh empat.
+Dan kini, Budi juga bisa, dalam dua detik.
+Sekarang giliranmu. Lima puluh delapan kuadrat, dikurangi empat puluh dua kuadrat. Tulis angkanya saja di komentar!
+Follow untuk trik hitung cepat lainnya!
