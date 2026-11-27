@@ -1,0 +1,12 @@
+Dua puluh empat donat, tiga puluh enam kue. Dibagi rata ke kantong, tanpa sisa. Paling banyak, berapa kantong?
+Ani dan Budi mau jualan di bazar sekolah, dan ingin kantong sebanyak mungkin. Budi langsung coba sepuluh kantong. Donatnya dua per kantong, tapi sisa empat. Gagal!
+Coba delapan kantong. Donatnya pas, tiga per kantong. Tapi kuenya sisa empat. Gagal lagi!
+Ani tersenyum. Jumlah kantongnya harus bisa membagi habis dua puluh empat, dan juga tiga puluh enam. Itulah faktor persekutuan.
+Kita tulis faktornya. Dua puluh empat: satu, dua, tiga, empat, enam, delapan, dua belas, dua puluh empat.
+Tiga puluh enam: satu, dua, tiga, empat, enam, sembilan, dua belas, delapan belas, tiga puluh enam.
+Yang ada di keduanya: satu, dua, tiga, empat, enam, dua belas. Yang terbesar, dua belas! Inilah FPB: Faktor Persekutuan Terbesar.
+Jadi, dua belas kantong. Tiap kantong berisi dua donat dan tiga kue. Pas, tidak ada sisa!
+Tapi jangan tertukar dengan KPK. Kalau membagi rata ke kelompok sebanyak-banyaknya, pakai FPB. Kalau mencari kapan bertemu lagi, pakai KPK.
+Dua belas kantong itu pun ludes terjual di bazar.
+Sekarang giliranmu. Delapan belas pensil dan tiga puluh penghapus, dibagi rata ke beberapa anak, tanpa sisa. Paling banyak berapa anak? Tulis angkanya saja di komentar!
+Follow untuk matematika sehari-hari lainnya!

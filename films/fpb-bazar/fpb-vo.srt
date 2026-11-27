@@ -1,0 +1,123 @@
+1
+00:00:00,270 --> 00:00:06,020
+24 donat, 36 kue. Dibagi rata ke kantong, tanpa sisa.
+
+2
+00:00:06,020 --> 00:00:08,180
+Paling banyak, berapa kantong?
+
+3
+00:00:08,180 --> 00:00:10,850
+Ani dan Budi mau jualan di bazar sekolah,
+
+4
+00:00:10,850 --> 00:00:13,210
+dan ingin kantong sebanyak mungkin.
+
+5
+00:00:13,210 --> 00:00:15,420
+Budi langsung coba 10 kantong.
+
+6
+00:00:15,420 --> 00:00:19,200
+Donatnya 2 per kantong, tapi sisa 4. Gagal!
+
+7
+00:00:19,200 --> 00:00:23,180
+Coba 8 kantong. Donatnya pas, 3 per kantong.
+
+8
+00:00:23,180 --> 00:00:26,210
+Tapi kuenya sisa 4. Gagal lagi!
+
+9
+00:00:26,210 --> 00:00:27,690
+Ani tersenyum.
+
+10
+00:00:27,690 --> 00:00:32,310
+Jumlah kantongnya harus bisa membagi habis 24,
+
+11
+00:00:32,310 --> 00:00:35,730
+dan juga 36. Itulah faktor persekutuan.
+
+12
+00:00:35,730 --> 00:00:37,570
+Kita tulis faktornya.
+
+13
+00:00:37,570 --> 00:00:44,810
+24: 1, 2, 3, 4, 6, 8, 12, 24.
+
+14
+00:00:44,810 --> 00:00:52,530
+36: 1, 2, 3, 4, 6, 9, 12, 18, 36.
+
+15
+00:00:52,530 --> 00:00:58,180
+Yang ada di keduanya: 1, 2, 3, 4, 6, 12.
+
+16
+00:00:58,180 --> 00:01:00,170
+Yang terbesar, 12!
+
+17
+00:01:00,170 --> 00:01:02,950
+Inilah FPB: Faktor Persekutuan Terbesar.
+
+18
+00:01:02,950 --> 00:01:05,560
+Jadi, 12 kantong.
+
+19
+00:01:05,560 --> 00:01:08,510
+Tiap kantong berisi 2 donat dan 3 kue.
+
+20
+00:01:08,510 --> 00:01:10,400
+Pas, tidak ada sisa!
+
+21
+00:01:10,400 --> 00:01:12,670
+Tapi jangan tertukar dengan KPK.
+
+22
+00:01:12,670 --> 00:01:14,500
+Kalau membagi rata ke kelompok
+
+23
+00:01:14,500 --> 00:01:16,680
+sebanyak-banyaknya, pakai FPB.
+
+24
+00:01:16,680 --> 00:01:19,970
+Kalau mencari kapan bertemu lagi, pakai KPK.
+
+25
+00:01:19,970 --> 00:01:22,970
+12 kantong itu pun ludes terjual di bazar.
+
+26
+00:01:22,970 --> 00:01:24,380
+Sekarang giliranmu.
+
+27
+00:01:24,380 --> 00:01:27,070
+18 pensil dan 30 penghapus,
+
+28
+00:01:27,070 --> 00:01:29,930
+dibagi rata ke beberapa anak, tanpa sisa.
+
+29
+00:01:29,930 --> 00:01:31,430
+Paling banyak berapa anak?
+
+30
+00:01:31,430 --> 00:01:33,210
+Tulis angkanya saja di komentar!
+
+31
+00:01:33,210 --> 00:01:36,790
+Follow untuk matematika sehari-hari lainnya!
